@@ -34,6 +34,9 @@ gem 'fast_jsonapi'
 # Paginator for Ruby webapps
 gem 'kaminari'
 
+# Ruby toolkit for the GitHub API
+gem 'octokit'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
