@@ -31,4 +31,14 @@ RSpec.describe Article, type: :model do
       expect(invalid_article.errors.messages[:slug]).to include('has already been taken')
     end
   end
+
+  describe '.recent' do
+    it 'should return recent article first' do
+      old_article = create :article
+      new_article = create :article
+      expect(described_class.recent).to eq([new_article, old_article])
+      old_article.update_column :created_at, Time.now
+      expect(described_class.recent).to eq([old_article, new_article])
+    end
+  end
 end
