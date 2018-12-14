@@ -44,6 +44,6 @@ class PaginationMetaGenerator
   end
 
   def include_page?(page)
-    (page != 0) && (page != DEFAULT_PAGE)
+    page != 0
   end
 end
