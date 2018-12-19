@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe AccessTokensController, type: :controller do
-  describe '#create' do
+  describe 'POST #create' do
     shared_examples_for 'unauthorized_requests' do
       let(:error) do
         {
