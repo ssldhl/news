@@ -1,5 +1,6 @@
 class UserAuthenticator
   class AuthenticationError < StandardError; end
+  class AuthorizationError < StandardError; end
 
   attr_reader :user, :access_token
 
