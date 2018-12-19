@@ -53,6 +53,18 @@ RSpec.describe UserAuthenticator do
         expect(authenticator.user.login).to eq(user.login)
         expect(authenticator.user).to be_valid
       end
+
+      it "should create and set user's access token" do
+        expect { subject }.to change { AccessToken.count }.by(1)
+        expect(authenticator.access_token).to be_present
+      end
+
+      it 'should return previous access token if user exists' do
+        user = create :user, user_data
+        user.create_access_token
+        expect { subject }.not_to change { AccessToken.count }.from(1)
+        expect(authenticator.access_token).to eq(user.access_token)
+      end
     end
   end
 end
