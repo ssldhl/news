@@ -1,10 +1,15 @@
 class ApplicationController < ActionController::API
-  def render(options = {})
-    pagination = PaginationMetaGenerator
-                 .new(request: request,
-                      total_pages: options[:json].total_pages)
-                 .generate
-    options[:json] = serializer.new(options[:json], pagination)
-    super(options)
+  rescue_from UserAuthenticator::AuthenticationError, with: :authentication_error
+
+  private
+
+  def authentication_error
+    error = {
+      status: '401',
+      source: { pointer: '/code' },
+      title: 'Authentication code is invalid',
+      detail: 'You must provide valid code in order to exchange it for token.'
+    }
+    render json: { errors: [error] }, status: :unauthorized
   end
 end

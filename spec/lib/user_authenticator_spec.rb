@@ -5,6 +5,14 @@ RSpec.describe UserAuthenticator do
     let(:authenticator) { described_class.new('sample_code') }
     subject { authenticator.perform }
 
+    context 'when the code is empty' do
+      it 'should raise an error' do
+        authenticator = described_class.new('')
+        expect { authenticator.perform }.to raise_error(UserAuthenticator::AuthenticationError)
+        expect(authenticator.user).to be_nil
+      end
+    end
+
     context 'when the code is incorrect' do
       let(:error) { double('Sawyer::Resource', error: 'bad_verification_code') }
 

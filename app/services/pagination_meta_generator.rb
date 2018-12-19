@@ -6,7 +6,7 @@ class PaginationMetaGenerator
     @url = request.base_url + request.path
     @page = request.params[:page].to_i
     @per_page = request.params[:per_page].to_i
-    @total_pages = total_pages
+    @total_pages = total_pages || 0
     @hash = { links: {}, meta: { current_page: page, total_pages: total_pages } }
   end
 
