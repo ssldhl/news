@@ -67,7 +67,7 @@ RSpec.describe AccessTokensController, type: :controller do
     end
 
     context 'when invalid authorization header provided' do
-      before { request.headers['authorization']  = 'Invalid token' }
+      before { request.headers['authorization'] = 'Invalid token' }
 
       it_behaves_like 'forbidden_requests'
     end
